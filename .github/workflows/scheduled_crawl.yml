@@ -28,12 +28,15 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
         run: |
           python scripts/run_all_active_sites.py
       
       - name: Report failure
         if: failure()
         env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
         run: |
           python scripts/report_failure.py 
